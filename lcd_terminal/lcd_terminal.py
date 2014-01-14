@@ -21,12 +21,22 @@ try:
                 pass
             lcd.clear()
             lcd.message("%s\n%s"%(output[start],output[start+1]))
-            while not(lcd.buttonPressed(lcd.DOWN)):
+            while not(lcd.buttonPressed(lcd.DOWN)  or lcd.buttonPressed(lcd.UP)):
                 time.sleep(0.5)
                 lcd.scrollDisplayLeft()
-            start+=1
-            
-            
+            if (start+1)<len(output):
+                start+=1
+        if lcd.buttonPressed(lcd.UP):
+            while lcd.buttonPressed(lcd.UP):
+                pass
+            lcd.clear()
+            lcd.message("%s\n%s"%(output[start],output[start+1]))
+            while not(lcd.buttonPressed(lcd.DOWN) or lcd.buttonPressed(lcd.UP)):
+                time.sleep(0.5)
+                lcd.scrollDisplayLeft()
+            if (start-1)>0:
+                start-=1
+                      
 except KeyboardInterrupt: #The program will run until ctrl-c is pressed
     lcd.clear()
         
